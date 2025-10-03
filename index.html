@@ -1,0 +1,171 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HousingPath Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f0f4f8;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: #e0e0e0;
+      padding: 0.5em;
+    }
+    nav button {
+      background: none;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .container {
+      padding: 1em;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.75em;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 0.4em;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button.action {
+      padding: 0.5em 1em;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button.action:hover {
+      background: #003060;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏠 HousingPath Admin Dashboard</h1>
+    <p>Welcome, Safe Harbor Vallejo</p>
+  </header>
+
+  <nav>
+    <button onclick="showTab('referrals')">Referrals</button>
+    <button onclick="showTab('profile')">Program Profile</button>
+    <button onclick="showTab('analytics')">Analytics</button>
+    <button onclick="showTab('settings')">Settings</button>
+  </nav>
+
+  <div class="container">
+    <!-- Referrals Tab -->
+    <div id="referrals" class="card">
+      <h2>📋 Referrals</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Program</th>
+            <th>Status</th>
+            <th>Notes</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Michael Johnson</td>
+            <td>Safe Harbor Vallejo</td>
+            <td><select><option>Pending</option><option selected>Contacted</option><option>Housed</option></select></td>
+            <td><input type="text" value="Awaiting intake paperwork."></td>
+            <td><button class="action" onclick="saveRow(this)">Save</button></td>
+          </tr>
+          <tr>
+            <td>James Carter</td>
+            <td>Valor Supportive Living</td>
+            <td><select><option selected>Pending</option><option>Contacted</option><option>Housed</option></select></td>
+            <td><input type="text" value="VA verified. Intake scheduled."></td>
+            <td><button class="action" onclick="saveRow(this)">Save</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Program Profile Tab -->
+    <div id="profile" class="card hidden">
+      <h2>🏠 Program Profile</h2>
+      <label>Program Name</label>
+      <input type="text" value="Safe Harbor Vallejo">
+      <label>Monthly Cost</label>
+      <input type="text" value="$950">
+      <label>Support Services</label>
+      <input type="text" value="Addiction Recovery, Peer Mentorship">
+      <label>Visibility</label>
+      <select><option>Public</option><option>Private</option></select>
+      <button class="action" style="margin-top:1em;">Save Profile</button>
+    </div>
+
+    <!-- Analytics Tab -->
+    <div id="analytics" class="card hidden">
+      <h2>📈 Analytics</h2>
+      <p>Referrals received: <strong>12</strong></p>
+      <p>Placement rate: <strong>67%</strong></p>
+      <p>Average time to intake: <strong>4.2 days</strong></p>
+      <p>Top referral sources: <strong>CDCR, VA, Reentry Coalition</strong></p>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settings" class="card hidden">
+      <h2>⚙️ Settings</h2>
+      <label>Notification Preferences</label>
+      <select><option>Email Alerts</option><option>SMS Alerts</option><option>None</option></select>
+      <label>API Access</label>
+      <select><option>Enabled</option><option>Disabled</option></select>
+      <button class="action" style="margin-top:1em;">Save Settings</button>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+    }
+
+    function saveRow(button) {
+      const row = button.closest('tr');
+      const client = row.cells[0].textContent;
+      const program = row.cells[1].textContent;
+      const status = row.cells[2].querySelector('select').value;
+      const notes = row.cells[3].querySelector('input').value;
+
+      console.log(Saved: ${client} → ${program} → ${status} → ${notes});
+      alert(Referral updated for ${client});
+    }
+  </script>
+</body>
+</html>
+`
